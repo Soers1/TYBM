@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>技能大赛报名页</title>
+  <style>
+    :root {
+      --blue: #2457d6;
+      --deep: #102d70;
+      --text: #17233b;
+      --muted: #68778e;
+      --line: #dfe7f2;
+    }
+
+* { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px 16px;
+      font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: linear-gradient(145deg, #eaf2ff, #f9fbff);
+    }
+
+.page {
+      width: min(100%, 940px);
+      margin: 24px auto;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 22px 60px rgba(25, 60, 130, .13);
+    }
+
+.hero {
+      padding: 42px 48px;
+      color: #fff;
+      background: linear-gradient(115deg, var(--deep), var(--blue) 72%, #5389f2);
+    }
+
+.tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, .4);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+
+.hero h1 {
+      margin: 18px 0 8px;
+      font-size: clamp(30px, 5vw, 44px);
+    }
+
+.hero p { margin: 0; color: #dce8ff; }
+
+.registration {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 38px;
+      padding: 42px 48px 50px;
+    }
+
+h2 { margin: 0 0 12px; font-size: 23px; }
+    h3 { margin: 0 0 8px; font-size: 19px; }
+
+.muted {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+.deadline {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      color: #965100;
+      background: #fff2d9;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+.steps {
+      margin-top: 26px;
+      padding-left: 16px;
+      border-left: 3px solid #c7d8ff;
+      color: var(--muted);
+      line-height: 2;
+      font-size: 14px;
+    }
+
+.steps strong { color: var(--blue); }
+
+.panel {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+label {
+      display: block;
+      margin: 18px 0 8px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+input, select, textarea {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid #d6e0ed;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+input, select {
+      height: 48px;
+      padding: 0 14px;
+    }
+
+textarea {
+      min-height: 94px;
+      padding: 12px 14px;
+      resize: vertical;
+    }
+
+input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(36, 87, 214, .12);
+    }
+
+input[readonly] { background: #f4f7fb; }
+
+.row { display: flex; gap: 10px; }
+    .area-code { flex: 0 0 88px; }
+
+button {
+      height: 48px;
+      border: 0;
+      border-radius: 10px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+button:disabled { opacity: .65; cursor: not-allowed; }
+
+.send-button {
+      flex: 0 0 140px;
+      padding: 0 10px;
+      color: var(--blue);
+      background: #eaf1ff;
+    }
+
+.primary-button {
+      width: 100%;
+      margin-top: 26px;
+      color: #fff;
+      background: var(--blue);
+    }
+
+.message {
+      min-height: 22px;
+      margin: 14px 0 0;
+      color: #53627a;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+.member-page { padding: 36px 48px 50px; }
+
+.member-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+.member-heading p { margin: 4px 0 0; }
+
+.badge {
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: var(--blue);
+      background: #eaf1ff;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+.member-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.4fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+.profile-card {
+      padding: 27px;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(150deg, #17377d, #3065df);
+    }
+
+.avatar {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 22px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .18);
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+.profile-card p {
+      color: #dce8ff;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+.two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 14px;
+    }
+
+@media (max-width: 720px) {
+      .hero { padding: 32px 26px; }
+      .registration, .member-grid { grid-template-columns: 1fr; }
+      .registration { padding: 30px 26px 38px; gap: 24px; }
+      .member-page { padding: 30px 26px 38px; }
+    }
+
+@media (max-width: 420px) {
+      .panel { padding: 20px; }
+      .two-columns { grid-template-columns: 1fr; }
+      .send-button { flex-basis: 120px; font-size: 12px; }
+      .area-code { flex-basis: 76px; }
+      .member-heading { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <span class="tag">SKILLS COMPETITION · 报名通道</span>
+      <h1 id="pageTitle">技能大赛报名</h1>
+      <p id="pageSubtitle">以技能展现风采 · 让热爱成为实力</p>
+    </header>
+
+<!-- 第一步：手机号与六位数字 -->
+    <section class="registration" id="registrationView">
+      <div>
+        <h2>开启你的参赛之旅</h2>
+        <p class="muted">填写手机号和六位数字，进入团员主页完善报名信息。</p>
+        <div class="deadline">15:30之前提交</div>
+
+<div class="steps">
+          <strong>01</strong> 填写手机号<br />
+          <strong>02</strong> 进入团员主页<br />
+          <strong>03</strong> 填写并提交报名信息
+        </div>
+      </div>
+
+<div class="panel">
+        <h2>团员数据读取</h2>
+        <p class="muted">请先填写手机号。</p>
+
+<form id="entryForm">
+          <label for="phone">手机号</label>
+          <div class="row">
+            <input
+              id="areaCode"
+              class="area-code"
+              type="tel"
+              value="+86"
+              aria-label="区号"
+              required
+            />
+            <input
+              id="phone"
+              type="tel"
+              placeholder="请输入手机号"
+              autocomplete="tel-national"
+              required
+            />
+          </div>
+
+<label for="code">验证码</label>
+          <div class="row">
+            <input
+              id="code"
+              type="text"
+              inputmode="numeric"
+              maxlength="6"
+              pattern="[0-9]{6}"
+              placeholder="请输入六位数字"
+              required
+            />
+            <button class="send-button" id="sendCode" type="button">
+              获取验证码
+            </button>
+          </div>
+
+<button class="primary-button" type="submit">进入团员主页</button>
+          <p class="message" id="entryMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+<!-- 第二步：团员主页 -->
+    <section class="member-page" id="memberView" hidden>
+      <div class="member-heading">
+        <div>
+          <h2>团员主页</h2>
+          <p class="muted">完善资料，填写技能大赛报名信息。</p>
+        </div>
+        <span class="badge" id="registrationBadge">待填写</span>
+      </div>
+
+<div class="member-grid">
+        <aside class="profile-card">
+          <div class="avatar" aria-hidden="true">团</div>
+          <h3 id="greeting">欢迎报名</h3>
+          <p>技能大赛 · 团员报名</p>
+          <p id="profilePhone">手机号：—</p>
+        </aside>
+
+<div class="panel">
+          <h3>报名信息</h3>
+          <p class="muted">填写完成后，点击下方按钮提交。</p>
+
+<form id="profileForm">
+            <div class="two-columns">
+              <div>
+                <label for="memberName">姓名 *</label>
+                <input id="memberName" name="name" maxlength="40" required />
+              </div>
+              <div>
+                <label for="memberPhone">手机号</label>
+                <input id="memberPhone" readonly />
+              </div>
+            </div>
+
+<label for="organization">所属组织 / 单位 *</label>
+            <input
+              id="organization"
+              name="organization"
+              maxlength="100"
+              placeholder="例如：XX学校XX团支部"
+              required
+            />
+
+<div class="two-columns">
+              <div>
+                <label for="competitionProject">参赛项目 *</label>
+                <input
+                  id="competitionProject"
+                  name="competitionProject"
+                  maxlength="100"
+                  placeholder="请输入参赛项目"
+                  required
+                />
+              </div>
+              <div>
+                <label for="teamType">参赛形式 *</label>
+                <select id="teamType" name="teamType" required>
+                  <option value="">请选择</option>
+                  <option value="个人赛">个人赛</option>
+                  <option value="团队赛">团队赛</option>
+                </select>
+              </div>
+            </div>
+
+<label for="remarks">补充说明</label>
+            <textarea
+              id="remarks"
+              name="remarks"
+              maxlength="500"
+              placeholder="参赛经历、技能特长等（选填）"
+            ></textarea>
+
+<button class="primary-button" type="submit">提交报名信息</button>
+            <p class="message" id="saveMessage" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+    const registrationView = document.querySelector("#registrationView");
+    const memberView = document.querySelector("#memberView");
+    const sendButton = document.querySelector("#sendCode");
+    const entryMessage = document.querySelector("#entryMessage");
+    const saveMessage = document.querySelector("#saveMessage");
+
+let countdownTimer = null;
+    let currentPhone = "";
+
+function getPhone() {
+      const areaCode = document.querySelector("#areaCode").value.trim();
+      const phone = document.querySelector("#phone").value.trim();
+      return { areaCode, phone };
+    }
+
+function validPhone({ areaCode, phone }) {
+      return /^\+\d{1,4}$/.test(areaCode) && /^\d{6,15}$/.test(phone);
+    }
+
+function openMemberPage() {
+      registrationView.hidden = true;
+      memberView.hidden = false;
+
+document.title = "团员主页";
+      document.querySelector("#pageTitle").textContent = "团员主页";
+      document.querySelector("#pageSubtitle").textContent =
+        "技能大赛报名 · 完善个人资料";
+      document.querySelector("#memberPhone").value = currentPhone;
+      document.querySelector("#profilePhone").textContent =
+        `手机号：${currentPhone}`;
+
+// 同一浏览器中如有此前填写的内容，自动恢复。
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem("competitionRegistration")
+        );
+
+if (saved && saved.phone === currentPhone) {
+          document.querySelector("#memberName").value = saved.name || "";
+          document.querySelector("#organization").value =
+            saved.organization || "";
+          document.querySelector("#competitionProject").value =
+            saved.competitionProject || "";
+          document.querySelector("#teamType").value = saved.teamType || "";
+          document.querySelector("#remarks").value = saved.remarks || "";
+          document.querySelector("#registrationBadge").textContent = "已保存";
+          document.querySelector("#greeting").textContent =
+            saved.name ? `你好，${saved.name}` : "欢迎报名";
+        }
+      } catch {
+        // 浏览器不支持本地存储时，仍可继续填写页面。
+      }
+
+window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+sendButton.addEventListener("click", () => {
+      if (!validPhone(getPhone())) {
+        entryMessage.textContent = "请填写有效的区号和手机号。";
+        return;
+      }
+
+if (countdownTimer !== null) return;
+
+let secondsLeft = 60;
+      sendButton.disabled = true;
+      sendButton.textContent = `${secondsLeft} 秒后重试`;
+      entryMessage.textContent = "倒计时已开始，请填写六位数字继续。";
+
+countdownTimer = window.setInterval(() => {
+        secondsLeft -= 1;
+
+if (secondsLeft > 0) {
+          sendButton.textContent = `${secondsLeft} 秒后重试`;
+          return;
+        }
+
+window.clearInterval(countdownTimer);
+        countdownTimer = null;
+        sendButton.disabled = false;
+        sendButton.textContent = "获取验证码";
+      }, 1000);
+    });
+
+document.querySelector("#entryForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+const phoneData = getPhone();
+      const code = document.querySelector("#code").value.trim();
+
+if (!validPhone(phoneData)) {
+        entryMessage.textContent = "请填写有效的区号和手机号。";
+        return;
+      }
+
+if (!/^\d{6}$/.test(code)) {
+        entryMessage.textContent = "请输入任意六位数字。";
+        return;
+      }
+
+// 此处仅检查是否为六位数字，不进行真实短信校验。
+      currentPhone = phoneData.areaCode + phoneData.phone;
+      openMemberPage();
+    });
+
+document.querySelector("#profileForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+const data = {
+        phone: currentPhone,
+        name: document.querySelector("#memberName").value.trim(),
+        organization: document.querySelector("#organization").value.trim(),
+        competitionProject:
+          document.querySelector("#competitionProject").value.trim(),
+        teamType: document.querySelector("#teamType").value,
+        remarks: document.querySelector("#remarks").value.trim()
+      };
+
+if (!data.name || !data.organization ||
+          !data.competitionProject || !data.teamType) {
+        saveMessage.textContent = "请填写所有必填项。";
+        return;
+      }
+
+try {
+        // 接入 PHP 时，可在这里改为请求你的保存接口。
+        localStorage.setItem(
+          "competitionRegistration",
+          JSON.stringify(data)
+        );
+
+document.querySelector("#greeting").textContent =
+          `你好，${data.name}`;
+        document.querySelector("#registrationBadge").textContent = "已保存";
+        saveMessage.textContent = "信息已保存到当前浏览器。";
+      } catch {
+        saveMessage.textContent = "保存失败，请检查浏览器存储权限。";
+      }
+    });
+  </script>
+</body>
+</html>
